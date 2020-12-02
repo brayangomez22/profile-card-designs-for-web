@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     
+	<style>
+			
+	:root {
+		--color-secondary: #f6d8d1;
+		--color-white: white;
+		--color-accent: #fcf5f3;
+		--spacer: 1.25rem;
+		--d: 2000ms;
+		--d2: 600ms;
+		--e: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+		--e2: cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		background-image: url(desert-4747664_1280.jpg);
+		background-size: cover;
+		display: grid;
+		font-family: 'Roboto', sans-serif;
+		height: 100vh;
+		margin: 0;
+		overflow: hidden;     
+		padding: var(--spacer);
+		place-items: center;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		max-width: 350px;
+		overflow-y: hidden;
+		padding: 0 var(--spacer);
+		perspective: 1200px;
+		position: relative;
+		transform: translateY(30%);
+		transition: transform var(--d2) var(--e2);
+		margin-top: -30px !important;
+	}
+
+	.card.is-active {
+		animation: throw var(--d2) var(--e2) forwards;
+		overflow: hidden;
+	}
+
+	.card.is-closing {
+		transform: translateY(0);
+	}
+
+	.card-illustration {
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		background-color: var(--color-accent);
+		z-index: 2;
+	}
+	
+	.card-content {
+		position: relative;
+		transform: scaleY(0);
+		transform-origin: 0 0;
+		z-index: 1;
+	}
+
+	.is-closing .card-content {
+		animation: slide-up var(--d2) var(--e2) forwards;
+		transform: scaleY(1);
+	}
+
+	.is-active .card-content {
+		animation: swing var(--d) calc(var(--d2) / 2) var(--e) forwards;
+	}
+
+	.card-info {
+		background-color: var(--color-white);
+		padding: var(--spacer);
+	}
+
+	.card-info > * + * {
+		margin-top: var(--spacer);
+	}
+
+	.card-name {
+		font-size: 1.75rem;
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+
+	.card-title {
+		display: inline-block;
+		background-color:#0c8bbd;
+		border-radius: 360px;
+		color: var(--color-white);
+		font-size: 0.75rem;
+		letter-spacing: 0.025rem;
+		padding: 0.5rem 1rem;
+	}
+
+	.card-desc {
+		font-size: 1rem;
+		line-height: 1.4;
+	}
+
+	.card-actions {
+		display: flex;
+		width: 100%;
+	}
+
+	.btn {
+		background-color: #0b3a5c;
+		border: none;
+		color: white;
+		cursor: pointer;
+		font-family: inherit;
+		font-size: 0.75rem;
+		letter-spacing: 0.05rem;
+		margin: 0;
+		outline: none;
+		padding: var(--spacer);
+		position: relative;
+		text-transform: uppercase;
+		transition: background-color var(--d2) var(--e2);
+		transform-origin: 0 0;
+	}
+
+	.btn-action {
+		flex: 1;
+	}
+
+	.btn-action:nth-child(2) {
+		background-color: #0c8bbd;
+	}
+
+	.is-active .btn-action {
+		transform: scaleX(0);
+	}
+
+	.is-active .btn-action:nth-child(1) {
+		animation: swing calc(var(--d) * 1.25) calc(var(--d) / 4) var(--e) forwards;
+	}
+
+	.is-active .btn-action:nth-child(2) {
+		animation: swing calc(var(--d) * 1.5) calc(var(--d) / 3) var(--e) forwards;
+	}
+
+	.btn-close {
+		align-items: center;
+		background-color: transparent;
+		display: flex;
+		justify-content: center;
+		opacity: 0;
+		position: absolute;
+		padding: calc(var(--spacer) / 2);
+		right: var(--spacer);
+		top: 0.25rem;
+		transition: opacity var(--d2) var(--d) var(--e2);
+		visibility: hidden;
+		z-index: 2;
+	}
+
+	.is-active .btn-close {
+		visibility: visible;
+		opacity: 1;
+	}
+	
+	@keyframes throw {
+		35% {
+			transform: translateY(-10%) rotate(-2deg);
+		}
+		50% {
+			transform: translateY(30%) rotate(10deg);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes swing {
+		0% {
+			transform: rotateX(90deg);
+		}
+		15% {
+			transform: rotateX(-70deg);
+		}
+		30% {
+			transform: rotateX(50deg);
+		}
+		45% {
+			transform: rotateX(-30deg);
+		}
+		60% {
+			transform: rotateX(15deg);
+		}
+		75% {
+			transform: rotateX(-10deg);
+		}
+		90% {
+			transform: rotateX(5deg);
+		}
+		100% {
+			transform: rotateX(0);
+		}
+	}
+
+	@keyframes slide-up {
+		to {
+			transform: translateY(-100%);
+		}
+	}
+
+	.fa{
+		font-size: 30px;
+	}
+	
+	</style>
+	 
+</head>
+ 
+<body>
+
+    <div class="card">
+
+		<div class="card-illustration">
+			<svg viewBox="0 0 100 100">
+				<img src="new.png" alt="">
+			</svg>
+		</div>
+		  
+  		<div class="card-content">
+			<div class="card-info">
+				<h2 class="card-name">PROFILE CARD</h2>
+				<h3 class="card-title">WITH COOL CSS EFFECTS</h3>
+				<p class="card-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, voluptas necessitatibus, optio nihil totam, accusamus maiores dolores provident et labore voluptatum quibusdam similique voluptate excepturi  </p>
+			</div>
+
+    		<div class="card-actions">
+     			 <button class="btn btn-action">like</button>
+      			<button class="btn btn-action">Subscribe</button>
+    		</div>
+		  </div>
+		  
+  		<button class="btn btn-close">
+
+			<svg viewBox="0 0 24 24">
+				<i class="fa fa-close"></i>
+			</svg>
+
+		</button>
+		  
+	</div>
+
+	<script>
+		const card = document.querySelector('.card');
+		const open = card.querySelector('.card-illustration');
+		const close = card.querySelector('.btn-close');
+		const content = card.querySelector('.card-content');
+		const illustration = card.querySelector('.card-illustration')
+		const cls = {
+			active: 'is-active',
+			closing: 'is-closing'
+		};
+	
+		open.addEventListener('click', () => {
+		card.classList.add(cls.active);
+		});
+
+		close.addEventListener('click', () => {
+		card.classList.add(cls.closing);
+		card.classList.remove(cls.active);
+		});
+
+		content.addEventListener('animationend', () => {
+		card.classList.remove(cls.closing)
+		});
+
+		illustration.addEventListener('mousemove', function(e) {
+			const r = this.getBoundingClientRect()
+
+			this.style.setProperty('--x', e.clientX - (r.left + Math.floor(r.width / 2)))
+			this.style.setProperty('--y', e.clientY - (r.top + Math.floor(r.height / 2))) 
+		});
+
+		illustration.addEventListener('mouseout', function() {
+			this.style.setProperty('--x', 0)
+			this.style.setProperty('--y', 0)
+		});
+		
+	</script>
+
+</body>
+</html>
